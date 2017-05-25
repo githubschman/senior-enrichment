@@ -2,11 +2,11 @@ import axios from 'axios';
 
 // actions
 const INITIALIZE = 'INITIALIZE'
-const GET_GPA = 'GET_GPA'
+const GET_INFO = 'GET_INFO'
 
 // action creators
 const init = campuses => ({type: INITIALIZE, campuses})
-const getGPA = gpa => ({type: GET_GPA, gpa})
+const getInfo = (gpa, name, students) => ({type: GET_INFO, gpa, name, students})
 
 //states:
 const initialState = {campuses: [], campusInfo: {gpa: 0, name: '', students: []}}
@@ -19,8 +19,10 @@ const campusReducer = function(state = initialState, action) {
         case INITIALIZE:
             newState.campuses = [...action.campuses]
             break;
-        case GET_GPA:
-            newState.campusInfo.gpa = action.gpa
+        case GET_INFO:
+            newState.campusInfo.gpa = action.gpa,
+            newState.campusInfo.name = action.name,
+            newState.campusInfo.students = [...action.students]
             break;    
         default: 
             return newState;
@@ -35,10 +37,20 @@ export const fetchCampuses = () => dispatch => {
     .then(res => dispatch(init(res.data)));
 };
 
-export const fetchGPA = (schoolId) => dispatch => {
-    axios.get(`/api/campus/${schoolId}/info`)
-    .then(res => dispatch(getGPA(res.data)))
+export const fetchCampusInfo = (schoolId) => dispatch => {
+     Promise
+      .all(
+            [axios.get(`/api/campus/${schoolId}/info`), 
+             axios.get(`/api/campus/${schoolId}/name`),
+             axios.get(`/api/campus/${schoolId}/students`)])
+    .then(results => results.map(r => r.data))
+    .then(results => dispatch(getInfo(...results)))
 }
 
+
+// export const fetchCampusInfo = (schoolId) => dispatch => {
+//     axios.get(`/api/campus/${schoolId}/info`)
+//     .then(res => dispatch(getGPA(res.data)))
+// }
 
 export default campusReducer;

@@ -11,7 +11,7 @@ class StudentsCont extends Component {
   render() {
       return (
       <div>
-        <h1> Our Unique Students: </h1>
+        <h2> Our Unique Students: </h2>
         <div>
           <table>
            <thead>

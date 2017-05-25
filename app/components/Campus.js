@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 import Students from './Students'
 
 const testStudents = [
-    {name: 'Jenna', major: 'alien anthropology', grade: 'sophomore', gpa: 3.5, email:'jeonna@geomail.com'},
-    {name: 'Melanie', major: 'astrology', grade: 'freshman', gpa: 2.9, email:'meolanie@geomail.com'},
-    {name: 'Sarah', major: 'astrology', grade: 'junior', gpa: 4.0, email:'soroh@lizards.gov'},
-    {name: 'Liz', major: 'alien anthropology', grade: 'senior', gpa: 3.1, email:'Elizabeth@blerg.edu'}
+    {name: 'Jendddna', major: 'alien anthropology', grade: 'sophomore', gpa: 3.5, email:'jeonna@geomail.com'},
+    {name: 'Meldddanie', major: 'astrology', grade: 'freshman', gpa: 2.9, email:'meolanie@geomail.com'},
+    {name: 'Sardddah', major: 'astrology', grade: 'junior', gpa: 4.0, email:'soroh@lizards.gov'},
+    {name: 'Liddz', major: 'alien anthropology', grade: 'senior', gpa: 3.1, email:'Elizabeth@blerg.edu'}
   ]
 class SingleCampus extends Component {
   constructor(props){
@@ -19,7 +19,7 @@ class SingleCampus extends Component {
       console.log(testStudents)
     return (
       <div>
-        <h1> Single Campus Page! </h1>
+        <h1> The {this.props.name} Campus:</h1>
         <Students students={testStudents}/>
         <p> The average GPA on this campus is <strong>{this.props.gpa}</strong>.</p>
       </div>
@@ -30,6 +30,7 @@ class SingleCampus extends Component {
 const mapState = (state) => {
   return {
     gpa: state.campus.campusInfo.gpa.average,
+    name: state.campus.campusInfo.name,
     campus: state.campus
   }
 }

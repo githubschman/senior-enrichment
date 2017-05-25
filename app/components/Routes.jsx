@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import React, { Component } from 'react';
-import { fetchCampuses, fetchGPA } from '../reducers/campus-reducer.jsx'
+import { fetchCampuses, fetchCampusInfo } from '../reducers/campus-reducer.jsx'
 import { fetchStudents } from '../reducers/student-reducer.jsx'
 
 
@@ -15,12 +15,12 @@ import SingleCampus from './Campus'
 ///////////////
 
 
-const Routes = ({ fetchInitialData, fetchStudentsData, fetchGPAData }) => (
+const Routes = ({ fetchInitialData, fetchStudentsData, fetchSingleCampusData }) => (
   <Router history={browserHistory}>
     <Route path="/" component={AppContainer} onEnter={fetchInitialData}>
       <IndexRoute component={CampusesCont} />
           <Route path='/campuses' component={CampusesCont}/>
-          <Route path='/campus/:id' component={SingleCampus} onEnter={fetchGPAData}/>
+          <Route path='/campus/:id' component={SingleCampus} onEnter={fetchSingleCampusData}/>
           <Route path='/students' component={Students} onEnter={fetchStudentsData}/>
       <Route path="*" component={CampusesCont} />
     </Route>
@@ -44,9 +44,9 @@ const mapDispatch = dispatch => ({
   fetchStudentsData: () => {
     dispatch(fetchStudents());
   },
-  fetchGPAData: (nextState) => {
+  fetchSingleCampusData: (nextState) => {
     const campusId = nextState.params.id;
-    dispatch(fetchGPA(campusId));
+    dispatch(fetchCampusInfo(campusId));
   }
 });
 
