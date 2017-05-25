@@ -16,11 +16,11 @@ class SingleCampus extends Component {
 
 
   render() {
-      console.log(testStudents)
+      console.log(this.props.students)
     return (
       <div>
         <h1> The {this.props.name} Campus:</h1>
-        <Students students={testStudents}/>
+        <Students students={this.props.students}/>
         <p> The average GPA on this campus is <strong>{this.props.gpa}</strong>.</p>
       </div>
     )
@@ -31,6 +31,7 @@ const mapState = (state) => {
   return {
     gpa: state.campus.campusInfo.gpa.average,
     name: state.campus.campusInfo.name,
+    students: state.campus.campusInfo.students,
     campus: state.campus
   }
 }
