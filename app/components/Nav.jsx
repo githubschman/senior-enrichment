@@ -7,7 +7,7 @@ export default class Nav extends Component {
     <nav className="navbar navbar-inverse">
       <div className="container-fluid">
         <div className="navbar-header">
-          <Link className="navbar-brand" to="/">Space University</Link>
+          <Link className="navbar-brand" to="/">MHIA of JS</Link>
         </div>
         <ul className="nav navbar-nav">
           <li className="active"><Link to="/">Home</Link></li>

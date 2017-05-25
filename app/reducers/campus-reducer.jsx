@@ -2,12 +2,14 @@ import axios from 'axios';
 
 // actions
 const INITIALIZE = 'INITIALIZE'
+const GET_GPA = 'GET_GPA'
 
 // action creators
 const init = campuses => ({type: INITIALIZE, campuses})
+const getGPA = gpa => ({type: GET_GPA, gpa})
 
 //states:
-const initialState = {campuses: []}
+const initialState = {campuses: [], campusInfo: {gpa: 0, name: '', students: []}}
 
 //reducer:
 const campusReducer = function(state = initialState, action) {
@@ -17,7 +19,9 @@ const campusReducer = function(state = initialState, action) {
         case INITIALIZE:
             newState.campuses = [...action.campuses]
             break;
-            
+        case GET_GPA:
+            newState.campusInfo.gpa = action.gpa
+            break;    
         default: 
             return newState;
     }
@@ -30,5 +34,11 @@ export const fetchCampuses = () => dispatch => {
     axios.get('/api/campus/campuses')
     .then(res => dispatch(init(res.data)));
 };
+
+export const fetchGPA = (schoolId) => dispatch => {
+    axios.get(`/api/campus/${schoolId}/gpa`)
+    .then(res => dispatch(getGPA(res.data)))
+}
+
 
 export default campusReducer;
