@@ -36,7 +36,7 @@ export const fetchCampuses = () => dispatch => {
 };
 
 export const fetchGPA = (schoolId) => dispatch => {
-    axios.get(`/api/campus/${schoolId}/gpa`)
+    axios.get(`/api/campus/${schoolId}/info`)
     .then(res => dispatch(getGPA(res.data)))
 }
 

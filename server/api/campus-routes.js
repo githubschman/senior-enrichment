@@ -14,7 +14,7 @@ router.get('/campuses', (req, res, next) => {
 });
 
 //get gpa average for one campus
-router.get('/:schoolId/gpa', (req, res) => {
+router.get('/:schoolId/info', (req, res) => {
     let schoolId = req.params.schoolId
 	Student.getGPA(schoolId)
 	.then(avg => res.send({average: avg}))

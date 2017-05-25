@@ -42,9 +42,10 @@ class StudentsCont extends Component {
     )
   }
 }
-const mapState = (state) => {
+const mapState = (state, ownprops) => {
   return {
-    students: state.student.students
+    //CAN WHOEVER IS READING PLEASE APPRECIATE THIS, IT WAS SO HARD TO COME UP WITH
+    students: ownprops.students || state.student.students
   }
 }
 const mapDispatch = null;
