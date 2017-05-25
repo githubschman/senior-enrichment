@@ -35,4 +35,4 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {};
 
-export default connect(mapState, mapDispatch)(CampCont);
+export default connect(mapState, null)(CampCont);

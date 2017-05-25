@@ -12,8 +12,8 @@ router.get('/student-school/:id', (req, res) => {
 		id: req.params.id
 	}})
 	.then(student => student.getSchool()
-	.then(school => res.send({school: school.name})))
-})
+	.then(school => res.send({name: school.name})))
+});
 
 //get all students
 router.get('/all-students', (req, res, next) => {
@@ -29,7 +29,27 @@ router.get('/student/:id', (req, res, next) => {
 	}})
 	.then((student) => res.json(student))
 	.catch(next);
-})
+});
+
+//get student gpa by id
+router.get('/student/:id/gpa', (req, res, next) => {
+	Student.findOne({where:{
+		id: req.params.id
+	}})
+	.then((student) => res.send({gpa: student.gpa}))
+	.catch(next);
+});
+
+//get student name by id
+router.get('/student/:id/name', (req, res, next) => {
+	Student.findOne({where:{
+		id: req.params.id
+	}})
+	.then((student) => res.send({name: student.name}))
+	.catch(next);
+});
+
+
 
 
 module.exports = router;

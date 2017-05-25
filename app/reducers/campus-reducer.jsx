@@ -48,9 +48,5 @@ export const fetchCampusInfo = (schoolId) => dispatch => {
 }
 
 
-// export const fetchCampusInfo = (schoolId) => dispatch => {
-//     axios.get(`/api/campus/${schoolId}/info`)
-//     .then(res => dispatch(getGPA(res.data)))
-// }
 
 export default campusReducer;

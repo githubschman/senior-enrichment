@@ -3,12 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Students from './Students'
 
-const testStudents = [
-    {name: 'Jendddna', major: 'alien anthropology', grade: 'sophomore', gpa: 3.5, email:'jeonna@geomail.com'},
-    {name: 'Meldddanie', major: 'astrology', grade: 'freshman', gpa: 2.9, email:'meolanie@geomail.com'},
-    {name: 'Sardddah', major: 'astrology', grade: 'junior', gpa: 4.0, email:'soroh@lizards.gov'},
-    {name: 'Liddz', major: 'alien anthropology', grade: 'senior', gpa: 3.1, email:'Elizabeth@blerg.edu'}
-  ]
+
 class SingleCampus extends Component {
   constructor(props){
     super(props);
@@ -16,7 +11,6 @@ class SingleCampus extends Component {
 
 
   render() {
-      console.log(this.props.students)
     return (
       <div>
         <h1> The {this.props.name} Campus:</h1>
