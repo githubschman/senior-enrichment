@@ -55,14 +55,14 @@ router.post('/student/addnew/', (req, res, next) => {
 	let major = req.body.major;
 	let email = req.body.email;
 	let grade = req.body.grade;
-	let campus = req.body.campus;
+	let schoolId = req.body.campus;
 
 	// let findingCampusId = Campus.findOne({where:{
 	// 	name: campus
 	// }})
 
 	Student.create(req.body)
-	.then(newStudent => newStudent.setSchool(campus))
+	.then(newStudent => newStudent.setSchool(schoolId))
 	.catch(next);
 });
 

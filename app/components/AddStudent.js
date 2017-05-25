@@ -84,8 +84,8 @@ class AddStudent extends Component {
                              
                       <label>Grade</label>
                           <select name="campus" onChange={this.handleCampusChange}>
-                            <option value="Venus">Venus</option>
-                            <option value="Pluto">Pluto</option>
+                            <option value="1">Venus</option>
+                            <option value="2">Pluto</option>
                         </select>   
             
                   <button type="submit">SUBMIT</button> 
