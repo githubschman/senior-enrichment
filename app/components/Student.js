@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Students from './Students'
 
+import AddStudent from './AddStudent.js'
 
 class SingleStudent extends Component {
   constructor(props){
@@ -22,7 +23,7 @@ class SingleStudent extends Component {
 
 
 const mapState = (state) => {
-  
+
   return {
     name: state.student.studentInfo.name,
     gpa: state.student.studentInfo.gpa,

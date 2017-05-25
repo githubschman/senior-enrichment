@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
+import AddStudent from './AddStudent.js'
 
 class StudentsCont extends Component {
   constructor(props){
@@ -37,11 +38,18 @@ class StudentsCont extends Component {
             }
           </tbody>
           </table>
+
         </div>
+
+        <div>
+        <AddStudent />
+        </div>
+
       </div>
     )
   }
 }
+
 const mapState = (state, ownprops) => {
   return {
     //CAN WHOEVER IS READING PLEASE APPRECIATE THIS, IT WAS SO HARD TO COME UP WITH
