@@ -59,11 +59,11 @@ router.get('/student/:id/name', (req, res, next) => {
 
 router.post('/student/addnew/', (req, res, next) => {
 
-	let name = req.body.name;
-	let major = req.body.major;
-	let email = req.body.email;
-	let grade = req.body.grade;
-	let schoolId = req.body.campus;
+	// let name = req.body.name;
+	// let major = req.body.major;
+	// let email = req.body.email;
+	// let grade = req.body.grade;
+	// let schoolId = req.body.campus;
 
 	// let findingCampusId = Campus.findOne({where:{
 	// 	name: campus

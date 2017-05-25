@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
+import AddCampus from './AddCampus.js'
 
 class CampCont extends Component {
   constructor(props){
@@ -22,6 +23,7 @@ class CampCont extends Component {
           })}
           </ul>
         </div>
+        <AddCampus />
       </div>
     )
   }

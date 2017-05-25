@@ -13,6 +13,7 @@ import Students from './Students'
 import SingleCampus from './Campus'
 import SingleStudent from './Student'
 import AddStudent from './AddStudent.js' //idk why i had to add .js??
+import AddCampus from './AddCampus.js'
 
 ///////////////
 
@@ -25,6 +26,7 @@ const Routes = ({ fetchInitialData, fetchStudentsData, fetchSingleCampusData, fe
           <Route path='/campus/:id' component={SingleCampus} onEnter={fetchSingleCampusData}/>
           <Route path='/students' component={Students} onEnter={fetchStudentsData}/>
            <Route path='/add-student' component={AddStudent}/>
+           <Route path='/add-campus' component={AddCampus}/>
           <Route path='/students/:id' component={SingleStudent} onEnter={fetchSingleStudentData}/>
       <Route path="*" component={CampusesCont} />
     </Route>

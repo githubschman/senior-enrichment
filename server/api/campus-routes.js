@@ -35,5 +35,12 @@ router.get('/:schoolId/name/', (req, res, next) => {
 		.then(school => res.send(school.name))
 });
 
+///api/campus/newCampus
+router.post('/newCampus/', (req, res, next) => {
+    Campus.create(req.body)
+	.then(newcampus => res.send(newcampus))
+	.catch(next);
+});
+
 
 module.exports = router;
