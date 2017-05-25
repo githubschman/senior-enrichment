@@ -3,7 +3,6 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Students from './Students'
 
-import AddStudent from './AddStudent.js'
 
 class SingleStudent extends Component {
   constructor(props){

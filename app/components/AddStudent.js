@@ -3,6 +3,8 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Students from './Students'
 
+import { makeNewStudent } from '../reducers/student-reducer.jsx'
+
 class AddStudent extends Component {
   constructor(props){
     super(props);
@@ -42,9 +44,11 @@ class AddStudent extends Component {
   }
 
   handleSubmit(event){
+    const { handleStudentSubmit } = this.props;
+
     event.preventDefault();
     console.log(this.state)
-    console.log('hi?!')
+    handleStudentSubmit(this.state)
   }
 
 
@@ -71,22 +75,18 @@ class AddStudent extends Component {
                   
                       <label>Grade</label>
                           <select name="grade" onChange={this.handleGradeChange}>
-                            <option value={this.state.grade}>freshman</option>
-                            <option value={this.state.grade}>sophomore</option>
-                            <option value={this.state.grade}>junior</option>
-                            <option value={this.state.grade}>senior</option>
+                            <option value="freshman">freshman</option>
+                            <option value="sophomore">sophomore</option>
+                            <option value="junior">junior</option>
+                            <option value="senior">senior</option>
                         </select>
-            
 
-                        <label>Campus</label>
-                    
-                          <select name="campus" onChange={this.handleCampuschange}>
-                          {this.props.campuses.map((campus, index) => { 
-                            return <option key={index}>{campus.name}</option>
-                          })}
-                      
-                      </select>
-                        
+                             
+                      <label>Grade</label>
+                          <select name="campus" onChange={this.handleCampusChange}>
+                            <option value="Venus">Venus</option>
+                            <option value="Pluto">Pluto</option>
+                        </select>   
             
                   <button type="submit">SUBMIT</button> 
                 </form>
@@ -108,32 +108,28 @@ const mapState = (state) => {
 }
 
 const mapDispatch = dispatch => ({
-  handleStudentSubmit: () => {
-    dispatch(makeNewStudent());
+  handleStudentSubmit: (studentInfo) => {
+    dispatch(makeNewStudent(studentInfo));
   }
 });
 
-export default connect(mapState, null)(AddStudent);
+export default connect(mapState, mapDispatch)(AddStudent);
 
 
 
 
 
-// class AddStudent extends Component {
-//   constructor(props){
-//     super(props);
-//   }
+/*   REAL CAMPUSES NOT FAKE CAMPUSES:
+
+      <label>Campus</label>
+                    
+                          <select name="campus" onChange={this.handleCampuschange}>
+                          {this.props.campuses.map((campus, index) => { 
+                            return <option key={index} value={campus.name}>{campus.name}</option>
+                             }
+                          )
+                        }
+                        </select>
 
 
-//   render() {
-
-//     return (
-//       <div>add a student page</div>
-      
-//       )
-
-
-//   }
-// }
-
-// export default connect(null, null)(AddStudent);
+  */

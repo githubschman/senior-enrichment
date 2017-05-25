@@ -3,11 +3,12 @@ import axios from 'axios';
 // actions
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_STUDENT_INFO = 'GET_STUDENT_INFO'
-
+const CREATE_STUDENT = 'CREATE_STUDENT'
 
 // action creators
 const getStudents = students => ({type: GET_STUDENTS, students})
 const getInfo = (campus, gpa, name) => ({type: GET_STUDENT_INFO, campus, gpa, name})
+const createStudent = student => ({type: CREATE_STUDENT, student})
 
 //states:
 const initialState = {students: [], studentInfo: {campus: '', gpa: 0, name:''}}
@@ -23,7 +24,10 @@ const studentReducer = function(state = initialState, action) {
             newState.studentInfo.campus = action.campus.name
             newState.studentInfo.gpa = action.gpa.gpa,
             newState.studentInfo.name = action.name.name
-            break;              
+            break;
+        case CREATE_STUDENT:
+            newstate.students = [...action.student]
+            break;
         default: 
             return newState;
     }
@@ -48,6 +52,11 @@ export const fetchSingleStudentInfo = (studentId) => dispatch => {
     .then(results => {
         return dispatch(getInfo(...results))
     })
+}
+
+export const makeNewStudent = (studentInfo) => dispatch => {
+    axios.post('/api/students/student/addnew/', studentInfo)
+    .then(results => dispatch(createStudent(results.data)));
 }
 
 export default studentReducer;

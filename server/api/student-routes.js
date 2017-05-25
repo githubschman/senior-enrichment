@@ -49,6 +49,23 @@ router.get('/student/:id/name', (req, res, next) => {
 	.catch(next);
 });
 
+router.post('/student/addnew/', (req, res, next) => {
+
+	let name = req.body.name;
+	let major = req.body.major;
+	let email = req.body.email;
+	let grade = req.body.grade;
+	let campus = req.body.campus;
+
+	// let findingCampusId = Campus.findOne({where:{
+	// 	name: campus
+	// }})
+
+	Student.create(req.body)
+	.then(newStudent => newStudent.setSchool(campus))
+	.catch(next);
+});
+
 
 
 
