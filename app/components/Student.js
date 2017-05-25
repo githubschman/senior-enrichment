@@ -9,12 +9,10 @@ class SingleStudent extends Component {
     super(props);
   }
 
-
   render() {
-
     return (
       <div>
-        <h1> {this.props.name} goes to {this.props.campus} and has a {this.props.gpa} GPA</h1>
+        <h1> {this.props.name} goes to <Link to={`/campus/${this.props.campusId}`}> {this.props.campus} </Link> and has a {this.props.gpa} GPA</h1>
       </div>
     )
   }
@@ -22,11 +20,12 @@ class SingleStudent extends Component {
 
 
 const mapState = (state) => {
-
+  console.log(state)
   return {
     name: state.student.studentInfo.name,
     gpa: state.student.studentInfo.gpa,
-    campus: state.student.studentInfo.campus
+    campus: state.student.studentInfo.campus,
+    campusId: state.student.studentInfo.campusId
   }
 }
 

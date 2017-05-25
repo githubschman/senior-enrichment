@@ -7,11 +7,11 @@ const CREATE_STUDENT = 'CREATE_STUDENT'
 
 // action creators
 const getStudents = students => ({type: GET_STUDENTS, students})
-const getInfo = (campus, gpa, name) => ({type: GET_STUDENT_INFO, campus, gpa, name})
+const getInfo = (campus, gpa, name, campusId) => ({type: GET_STUDENT_INFO, campus, gpa, name, campusId})
 const createStudent = student => ({type: CREATE_STUDENT, student})
 
 //states:
-const initialState = {students: [], studentInfo: {campus: '', gpa: 0, name:''}}
+const initialState = {students: [], studentInfo: {campus: '', gpa: 0, name:'', campusId: 0}}
 //reducer:
 const studentReducer = function(state = initialState, action) {
     let newState = Object.assign({}, state);
@@ -24,6 +24,7 @@ const studentReducer = function(state = initialState, action) {
             newState.studentInfo.campus = action.campus.name
             newState.studentInfo.gpa = action.gpa.gpa,
             newState.studentInfo.name = action.name.name
+            newState.studentInfo.campusId = action.campusId.campusId
             break;
         case CREATE_STUDENT:
             newstate.students = [...action.student]
@@ -47,7 +48,8 @@ export const fetchSingleStudentInfo = (studentId) => dispatch => {
       .all(
             [axios.get(`/api/students/student-school/${studentId}`), 
              axios.get(`/api/students/student/${studentId}/gpa`),
-             axios.get(`/api/students/student/${studentId}/name`)])
+             axios.get(`/api/students/student/${studentId}/name`),
+            axios.get(`/api/students/student/${studentId}/campusId`)])
     .then(results => results.map(r => r.data))
     .then(results => {
         return dispatch(getInfo(...results))

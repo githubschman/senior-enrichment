@@ -40,6 +40,14 @@ router.get('/student/:id/gpa', (req, res, next) => {
 	.catch(next);
 });
 
+//get campus id for link...
+router.get('/student/:id/campusId', (req, res, next) => {
+	Student.findById(req.params.id)
+	.then((student) => res.send({campusId: student.schoolId}))
+	.catch(next);
+});
+
+
 //get student name by id
 router.get('/student/:id/name', (req, res, next) => {
 	Student.findOne({where:{
