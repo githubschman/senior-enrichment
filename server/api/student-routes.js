@@ -88,7 +88,8 @@ router.put('/:studentName', (req, res, next) => {
 	.then(foundStudent => foundStudent.update({
 		major: updatedInfo.major || foundStudent.major,
 		email: updatedInfo.email || foundStudent.email,
-		grade: updatedInfo.grade || foundStudent.grade
+		grade: updatedInfo.grade || foundStudent.grade,
+		schoolId: updatedInfo.schoolId || foundStudent.schoolId
 	}))
 	.then(() => res.status(200).end)
 	.catch(next);

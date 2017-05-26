@@ -11,24 +11,30 @@ class EditStudent extends Component {
       major: '',
       email: '',
       grade: '',
+      schoolId: 1
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleMajorChange = this.handleMajorChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleGradeChange = this.handleGradeChange.bind(this);
+    this.handleCampusChange = this.handleCampusChange.bind(this);
   }
 
-  handleMajorChange(event) {
-    this.setState({major: event.target.value});
-  }
+    handleMajorChange(event) {
+        this.setState({major: event.target.value});
+    }
 
-  handleEmailChange(event) {
-    this.setState({email: event.target.value});
-  }
+    handleEmailChange(event) {
+        this.setState({email: event.target.value});
+    }
 
-  handleGradeChange(event) {
-    this.setState({grade: event.target.value});
-  }
+    handleGradeChange(event) {
+        this.setState({grade: event.target.value});
+    }
+
+    handleCampusChange(event) {
+        this.setState({schoolId: event.target.value});
+    }
   
   handleSubmit(event){
     const { handleStudentUpdate } = this.props;
@@ -59,6 +65,16 @@ class EditStudent extends Component {
                             <option value="sophomore">sophomore</option>
                             <option value="junior">junior</option>
                             <option value="senior">senior</option>
+                        </select>
+
+                    <label>Campus</label>
+                    
+                              <select name="campus" onChange={this.handleCampusChange}>
+                              {this.props.campuses.map((campus, index) => { 
+                                return <option key={index} value={campus.id}>{campus.name}</option>
+                                }
+                              )
+                            }
                         </select>
             
                   <button type="submit">SUBMIT</button> 
