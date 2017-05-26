@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router'
-import {connect} from 'react-redux'
-import Students from './Students'
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import Students from './Students';
+import EditCampus from './EditCampus'
 
 import { deleteCampus } from '../reducers/campus-reducer.jsx'
 
@@ -29,6 +30,7 @@ class SingleCampus extends Component {
         <form onSubmit={this.handleSubmit}>
          <button type="submit">DELETE</button> 
         </form>
+        <EditCampus />
       </div>
     )
   }

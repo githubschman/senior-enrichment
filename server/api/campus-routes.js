@@ -54,6 +54,20 @@ router.delete('/delete/:campusName', (req, res, next) => {
 	.then(() => res.status(204).end)
 	.catch(next);
 	
+});
+
+router.put('/:campusName', (req, res, next) => {
+	let campusName = req.params.campusName;
+	let updatedInfo = req.body;
+
+	Campus.findOne({where: {
+		name: campusName
+	}})
+	.then(foundCampus => foundCampus.update({
+		name: updatedInfo.name
+	}))
+	.then(() => res.status(200).end)
+	.catch(next);
 })
 
 

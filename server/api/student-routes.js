@@ -78,7 +78,6 @@ router.delete('/delete/:studentName', (req, res, next) => {
 
 //updating a student
 router.put('/:studentName', (req, res, next) => {
-	console.log('getting into student update router')
 	let studentName = req.params.studentName;
 	let updatedInfo = req.body;
 
@@ -86,13 +85,13 @@ router.put('/:studentName', (req, res, next) => {
 		name: studentName
 	}})
 	.then(foundStudent => foundStudent.update({
-		major: updatedInfo.major || major,
-		email: updatedInfo.email || email,
-		grade: updatedInfo.grade || grade
+		major: updatedInfo.major || foundStudent.major,
+		email: updatedInfo.email || foundStudent.email,
+		grade: updatedInfo.grade || foundStudent.grade
 	}))
 	.then(() => res.status(200).end)
 	.catch(next);
-})
+});
 
 
 module.exports = router;

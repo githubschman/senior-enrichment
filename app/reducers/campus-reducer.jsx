@@ -5,12 +5,14 @@ const INITIALIZE = 'INITIALIZE';
 const GET_INFO = 'GET_INFO';
 const MAKE_CAMPUS = 'MAKE_CAMPUS';
 const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 
 // action creators
 const init = campuses => ({type: INITIALIZE, campuses})
 const getInfo = (gpa, name, students) => ({type: GET_INFO, gpa, name, students})
 const makeCampus = campus => ({type: MAKE_CAMPUS, campus})
 const removeCampus = name => ({type: REMOVE_CAMPUS, name})
+const updateCampus = updatedCampus => ({type: UPDATE_CAMPUS, updateCampus})
 
 //states:
 const initialState = {campuses: [], campusInfo: {gpa: 0, name: '', students: []}}
@@ -34,6 +36,9 @@ const campusReducer = function(state = initialState, action) {
        case REMOVE_CAMPUS:
             newState.campuses = newState.campuses.filter(campus => campus.name !== action.name)
             break; 
+        case UPDATE_CAMPUS:
+            newState.campuses = (campus => (campus.name === action.updatedCampus.name ? action.updatedCampus : campus))
+            break;
         default: 
             return newState;
     }
@@ -63,13 +68,17 @@ export const makeNewCampus = (campusName) => dispatch => {
 };
 
 export const deleteCampus = (campusName) => dispatch => {
-
     //dispatch remove campus
     dispatch(removeCampus(campusName))
 
     //then do axios delete
     axios.delete(`/api/campus/delete/${campusName}`)
     .then(results => console.log(results))
+}
+export const editCampusInfo = (campusName, newCampusInfo) => dispatch => {
+    axios.put(`/api/campus/${campusName}`, newCampusInfo)
+        .then(updatedCampus => dispatch(updateCampus(updatedCampus)))
+        .catch(err => console.error)
 }
 
 export default campusReducer;
