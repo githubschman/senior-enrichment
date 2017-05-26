@@ -24,7 +24,7 @@ class SingleCampus extends Component {
       <div>
         <h1> The {this.props.name} Campus:</h1>
         <Students students={this.props.students}/>
-        <p> The average GPA on this campus is <strong>{this.props.gpa}</strong>.</p>
+        <p> The average GPA on this campus is <strong>{this.props.gpa || 'nonexistant'}</strong>.</p>
         
         <form onSubmit={this.handleSubmit}>
          <button type="submit">DELETE</button> 

@@ -57,23 +57,25 @@ router.get('/student/:id/name', (req, res, next) => {
 	.catch(next);
 });
 
+//add new student
 router.post('/student/addnew/', (req, res, next) => {
-
-	// let name = req.body.name;
-	// let major = req.body.major;
-	// let email = req.body.email;
-	// let grade = req.body.grade;
-	// let schoolId = req.body.campus;
-
-	// let findingCampusId = Campus.findOne({where:{
-	// 	name: campus
-	// }})
-
 	Student.create(req.body)
 	.then(newStudent => newStudent.setSchool(schoolId))
 	.catch(next);
 });
 
+//delete student /api/students/delete/
+router.delete('/delete/:studentName', (req, res, next) => {
+	console.log('reaching delete api !!!')
+	let studentName = req.params.studentName;
+
+	Student.destroy({where: {
+		name: studentName
+	}})
+	.then(() => res.status(204).end)
+	.catch(next);
+	
+})
 
 
 

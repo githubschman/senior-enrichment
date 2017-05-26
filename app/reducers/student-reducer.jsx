@@ -1,14 +1,15 @@
 import axios from 'axios';
 
 // actions
-const GET_STUDENTS = 'GET_STUDENTS'
-const GET_STUDENT_INFO = 'GET_STUDENT_INFO'
-const CREATE_STUDENT = 'CREATE_STUDENT'
-
+const GET_STUDENTS = 'GET_STUDENTS';
+const GET_STUDENT_INFO = 'GET_STUDENT_INFO';
+const CREATE_STUDENT = 'CREATE_STUDENT';
+const REMOVE_STUDENT = 'REMOVE_STUDENT';
 // action creators
 const getStudents = students => ({type: GET_STUDENTS, students})
 const getInfo = (campus, gpa, name, campusId) => ({type: GET_STUDENT_INFO, campus, gpa, name, campusId})
 const createStudent = student => ({type: CREATE_STUDENT, student})
+const removeStudent = name => ({type: REMOVE_STUDENT, name})
 
 //states:
 const initialState = {students: [], studentInfo: {campus: '', gpa: 0, name:'', campusId: 0}}
@@ -28,6 +29,9 @@ const studentReducer = function(state = initialState, action) {
             break;
         case CREATE_STUDENT:
             newstate.students = [...action.student]
+            break;
+        case REMOVE_STUDENT:
+            newState.students = newState.students.filter(student => student.name !== action.name)    
             break;
         default: 
             return newState;
@@ -60,5 +64,16 @@ export const makeNewStudent = (studentInfo) => dispatch => {
     axios.post('/api/students/student/addnew/', studentInfo)
     .then(results => dispatch(createStudent(results.data)));
 }
+
+export const deleteStudent = (studentName) => dispatch => {
+
+    //dispatch remove student
+    dispatch(removeStudent(studentName))
+
+    //then do axios delete
+    axios.delete(`/api/students/delete/${studentName}`)
+    .then(results => console.log(results))
+}
+
 
 export default studentReducer;
