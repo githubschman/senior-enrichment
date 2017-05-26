@@ -4,11 +4,13 @@ import axios from 'axios';
 const INITIALIZE = 'INITIALIZE';
 const GET_INFO = 'GET_INFO';
 const MAKE_CAMPUS = 'MAKE_CAMPUS';
+const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 
 // action creators
 const init = campuses => ({type: INITIALIZE, campuses})
 const getInfo = (gpa, name, students) => ({type: GET_INFO, gpa, name, students})
 const makeCampus = campus => ({type: MAKE_CAMPUS, campus})
+const removeCampus = name => ({type: REMOVE_CAMPUS, name})
 
 //states:
 const initialState = {campuses: [], campusInfo: {gpa: 0, name: '', students: []}}
@@ -28,6 +30,11 @@ const campusReducer = function(state = initialState, action) {
             break;
         case MAKE_CAMPUS:
             newState.campuses = [...action.campus]  
+            break; 
+       case REMOVE_CAMPUS:
+            console.log(newState.campuses.filter(campus => campus.name !== action.name))
+            //state updates successfully, but you need to axios delete that shit
+            //newState.campuses = newState.campuses.filter(campus => campus.name !== action.name)
             break; 
         default: 
             return newState;
@@ -57,6 +64,22 @@ export const makeNewCampus = (campusName) => dispatch => {
     .then(results => dispatch(makeCampus(results.data)))
 };
 
+export const deleteCampus = (campusName) => dispatch => {
+    //it gets in here. campusName being passed in is correct.
+    
+    //dispatch remove campus
+    dispatch(removeCampus(campusName))
 
+    //then do axios delete!!!!
+}
+
+/*
+export const removeStory = id => dispatch => {
+  dispatch(remove(id));
+  axios.delete(`/api/stories/${id}`)
+       .catch(err => console.error(`Removing story: ${id} unsuccessful`, err));
+};
+
+*/
 
 export default campusReducer;

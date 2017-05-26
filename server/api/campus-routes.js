@@ -29,18 +29,47 @@ router.get('/:schoolId/students/', (req, res, next) => {
 		.then(students => res.send(students))
 });
 
+//get school name (i dont want to talk about it)
 router.get('/:schoolId/name/', (req, res, next) => {
     let schoolId = req.params.schoolId
 		Campus.findById(schoolId)
 		.then(school => res.send(school.name))
 });
 
-///api/campus/newCampus
+// make a new campus
 router.post('/newCampus/', (req, res, next) => {
     Campus.create(req.body)
 	.then(newcampus => res.send(newcampus))
 	.catch(next);
 });
 
+//delete a campus
+router.get('/delete/', (req, res, next) => {
+	console.log('reaching delete api !!!')
+
+
+	// let campusName = req.body.campusName;
+	// Campus.findOne({where: {
+	// 	name: campusName
+	// }})
+	// .then(foundCampus => {const found = foundCampus})
+	// .then(	
+	// 	Campus.destroy({where: {name: campusName}})
+	// )
+	// .then(() => res.send(found))
+	// .catch(next)
+
+})
+/*
+
+router.delete('/:id', function (req, res, next) {
+  req.story.destroy()
+  .then(function () {
+    res.status(204).end();
+  })
+  .catch(next);
+});
+
+*/
 
 module.exports = router;
