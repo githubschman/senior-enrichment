@@ -20,11 +20,9 @@ class AddCampus extends Component {
 
   handleSubmit(event){
     const { handleCampusSubmit } = this.props;
-
     event.preventDefault();
-    console.log(this.state)
     handleCampusSubmit(this.state)
-  }
+  };
 
 
   render() {

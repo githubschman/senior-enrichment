@@ -19,7 +19,7 @@ const Campus = require('./campus')
   },
   gpa: {
     type: Sequelize.FLOAT,
-    defaultValue: 2.5
+    defaultValue: 3.0
   },
   email: {
     type: Sequelize.STRING,
@@ -38,11 +38,15 @@ const Campus = require('./campus')
         studentGrades += student.gpa;
         studentCount++;
       }))
-      .then(() => studentGrades/studentCount)
+      .then(() => roundGPA(studentGrades/studentCount))
       .catch()
      }
    }
  })
+
+const roundGPA = (value) => {
+  return Number(Math.round(value+'e'+2)+'e-'+2);
+};
 
 User.belongsTo(Campus, {as: 'school'});
 module.exports = User;

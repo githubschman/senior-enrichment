@@ -40,11 +40,7 @@ class StudentsCont extends Component {
           </table>
 
         </div>
-
-        <div>
-        <AddStudent />
-        </div>
-
+         <Link to="/add-student">Add Student</Link>
       </div>
     )
   }

@@ -23,7 +23,7 @@ class CampCont extends Component {
           })}
           </ul>
         </div>
-        <AddCampus />
+        <Link to="/add-campus">Add Campus</Link>
       </div>
     )
   }
