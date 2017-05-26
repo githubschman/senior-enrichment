@@ -1,23 +1,23 @@
 import axios from 'axios';
 
-// actions
+/* ------------ actions ------------ */
 const INITIALIZE = 'INITIALIZE';
 const GET_INFO = 'GET_INFO';
 const MAKE_CAMPUS = 'MAKE_CAMPUS';
 const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 
-// action creators
+/* ------------ action creators ------------ */
 const init = campuses => ({type: INITIALIZE, campuses})
 const getInfo = (gpa, name, students) => ({type: GET_INFO, gpa, name, students})
 const makeCampus = campus => ({type: MAKE_CAMPUS, campus})
 const removeCampus = name => ({type: REMOVE_CAMPUS, name})
 const updateCampus = updatedCampus => ({type: UPDATE_CAMPUS, updateCampus})
 
-//states:
+/* ------------ state ------------ */
 const initialState = {campuses: [], campusInfo: {gpa: 0, name: '', students: []}}
 
-//reducer:
+/* ------------ actual reducer ------------ */
 const campusReducer = function(state = initialState, action) {
     let newState = Object.assign({}, state);
 
@@ -46,7 +46,7 @@ const campusReducer = function(state = initialState, action) {
 
 };
 
-// dispatchers:
+/* ------------ dispatchers ------------ */
 export const fetchCampuses = () => dispatch => {
     axios.get('/api/campus/campuses')
     .then(res => dispatch(init(res.data)));

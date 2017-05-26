@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Students from './Students';
 import EditCampus from './EditCampus'
 
+/* ------------ importing dispatcher ------------ */
 import { deleteCampus } from '../reducers/campus-reducer.jsx'
 
 
@@ -14,6 +15,8 @@ class SingleCampus extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /* ------------ event handler ------------ */
+
   handleSubmit(event){
     const { handleDelete } = this.props;
     event.preventDefault();
@@ -22,7 +25,7 @@ class SingleCampus extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1> The {this.props.name} Campus:</h1>
         <Students students={this.props.students}/>
         <p> The average GPA on this campus is <strong>{this.props.gpa || 'nonexistant'}</strong>.</p>
@@ -36,10 +39,13 @@ class SingleCampus extends Component {
   }
 }
 
+/* ------------ container ------------ */
+
 const mapState = (state) => {
   return {
     gpa: state.campus.campusInfo.gpa.average,
     name: state.campus.campusInfo.name,
+    //students list to be sent to Students components ownprops...
     students: state.campus.campusInfo.students,
     campus: state.campus
   }

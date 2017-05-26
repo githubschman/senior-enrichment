@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 
+/* ------------ importing edit student dispatcher ------------ */
 import { editStudent } from '../reducers/student-reducer.jsx'
 
 class EditStudent extends Component {
@@ -45,7 +46,7 @@ class EditStudent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
             <form onSubmit={this.handleSubmit}>
             
                 <h2> Edit this student </h2>

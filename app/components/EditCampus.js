@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 
+/* ------------ importing dispatcher ------------ */
 import { editCampusInfo } from '../reducers/campus-reducer.jsx'
 
 class EditCampus extends Component {
@@ -14,6 +15,7 @@ class EditCampus extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
   }
 
+/* ------------ event handlers ------------ */
   handleNameChange(event) {
     this.setState({name: event.target.value});
   }
@@ -27,7 +29,7 @@ class EditCampus extends Component {
 
   render() {
         return (
-        <div>
+        <div className="container">
                 <form onSubmit={this.handleSubmit}>
                 
                     <h2> Edit this Campus </h2>
@@ -46,7 +48,7 @@ class EditCampus extends Component {
 };
 
 
-
+/* ------------ container ------------ */
 
 const mapState = (state) => {
 

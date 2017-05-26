@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 
+/* ------------ Importing dispatcher ------------ */
 import { makeNewCampus } from '../reducers/campus-reducer.jsx'
+
 
 class AddCampus extends Component {
   constructor(props){
@@ -17,7 +19,8 @@ class AddCampus extends Component {
   handleNameChange(event) {
     this.setState({name: event.target.value});
   }
-
+  
+/* ------------ event handler ------------ */
   handleSubmit(event){
     const { handleCampusSubmit } = this.props;
     event.preventDefault();
@@ -28,7 +31,7 @@ class AddCampus extends Component {
   render() {
 
     return (
-      <div>
+      <div className="container">
             <form onSubmit={this.handleSubmit}>
             
                  <legend>Add a Campus</legend>
@@ -46,14 +49,7 @@ class AddCampus extends Component {
 
 }
 
-
-
-
-// const mapState = (state) => {
-//   return {
-
-//   }
-// }
+/* ------------ Container ------------ */
 
 const mapDispatch = dispatch => ({
   handleCampusSubmit: (campusName) => {
@@ -62,8 +58,6 @@ const mapDispatch = dispatch => ({
 });
 
 
-
-//NULL SARAH THESE ARE NULL FFS DON'T FORGET THAT THESE ARE NULL
 export default connect(null, mapDispatch)(AddCampus);
 
 

@@ -3,6 +3,8 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Students from './Students'
 import EditStudent from './EditStudent'
+
+/* ------------ importing dispatcher ------------ */
 import { deleteStudent } from '../reducers/student-reducer.jsx'
 
 
@@ -13,6 +15,7 @@ class SingleStudent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /* ------------ event handler ------------ */
   handleSubmit(event){
     const { handleStudentDelete } = this.props;
     event.preventDefault();
@@ -21,7 +24,7 @@ class SingleStudent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1> {this.props.name} goes to <Link to={`/campus/${this.props.campusId}`}> {this.props.campus} </Link> and has a {this.props.gpa} GPA</h1>
          <form onSubmit={this.handleSubmit}>
          <button type="submit">DELETE</button> 
@@ -33,6 +36,7 @@ class SingleStudent extends Component {
   }
 }
 
+/* ------------ container ------------ */
 
 const mapState = (state) => {
   return {

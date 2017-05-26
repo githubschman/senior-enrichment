@@ -1,22 +1,23 @@
 import axios from 'axios';
 
-// actions
+/* ------------ actions ------------ */
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT_INFO = 'GET_STUDENT_INFO';
 const CREATE_STUDENT = 'CREATE_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
-// action creators
+/* ------------ action creators ------------ */
 const getStudents = students => ({type: GET_STUDENTS, students});
 const getInfo = (campus, gpa, name, campusId) => ({type: GET_STUDENT_INFO, campus, gpa, name, campusId});
 const createStudent = student => ({type: CREATE_STUDENT, student});
 const removeStudent = name => ({type: REMOVE_STUDENT, name});
 const updateStudent = updatedStudent => ({type: UPDATE_STUDENT, updatedStudent});
 
-//states:
+/* ------------ states ------------ */
 const initialState = {students: [], studentInfo: {schoolId: 1, gpa: 0, name:'', campusId: 0}}
-//reducer:
+
+/* ------------ the actual reducer ------------ */
 const studentReducer = function(state = initialState, action) {
     let newState = Object.assign({}, state);
 
@@ -46,7 +47,7 @@ const studentReducer = function(state = initialState, action) {
 
 };
 
-// dispatchers:
+/* ------------ dispatchers ------------ */
 export const fetchStudents = () => dispatch => {
     axios.get('/api/students/all-students')
         .then(res => dispatch(getStudents(res.data)))
@@ -82,10 +83,11 @@ export const deleteStudent = (studentName) => dispatch => {
     axios.delete(`/api/students/delete/${studentName}`)
         .then(results => console.log(results))
         .catch(err => console.error);
+    //i was trying to pass studentname to remove student action throug the axios call originally, but you can't do that     
 }
 
 export const editStudent = (name, studentInfo) => dispatch => {
-    //ugh i just realized that two students could have the same name i dont know why i did this...
+    //ugh ok i realized that two students could have the same name too late :( i don't know why i didn't do id, i did name for like all of them, what a BLUNDER.
     axios.put(`/api/students/${name}`, studentInfo)
         .then(updatedStudent => dispatch(updateStudent(updatedStudent.data)))
         .catch(err => console.error);

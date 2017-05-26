@@ -5,18 +5,20 @@ import { fetchCampuses, fetchCampusInfo } from '../reducers/campus-reducer.jsx'
 import { fetchStudents, fetchSingleStudentInfo } from '../reducers/student-reducer.jsx'
 
 
-/* ---- all of these components: --- */
+/* ---- Components: --- */
 import AppContainer from './AppContainer'
 import Nav from './Nav'
 import CampusesCont from './Campuses'
 import Students from './Students'
 import SingleCampus from './Campus'
 import SingleStudent from './Student'
-import AddStudent from './AddStudent.js' //idk why i had to add .js??
+import AddStudent from './AddStudent.js' // I added .js because I accidentally touched it as a non-js file ??
 import AddCampus from './AddCampus.js'
 
-///////////////
 
+
+
+/* ---- Routes: --- */
 
 const Routes = ({ fetchInitialData, fetchStudentsData, fetchSingleCampusData, fetchSingleStudentData }) => (
   <Router history={browserHistory}>
@@ -35,14 +37,10 @@ const Routes = ({ fetchInitialData, fetchStudentsData, fetchSingleCampusData, fe
 
 
 
-////////////
+/* ---- Container: --- */
 
-
-
-//remember ${message}? mapProps = {message: log in}
 const mapStateToProps = null;
   
-//Get all campuses, all students
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
     dispatch(fetchCampuses());
@@ -60,9 +58,6 @@ const mapDispatch = dispatch => ({
   }
 });
 
-//fetchSingleStudentInfo
+
 
 export default connect(mapStateToProps, mapDispatch)(Routes);
-
-//const Routes = ({ fetchInitialData, onStoryEnter }) 
-//don't forget to add any onEnter  functions into the parameters of Route...

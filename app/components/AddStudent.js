@@ -23,6 +23,8 @@ class AddStudent extends Component {
     this.handleCampusChange = this.handleCampusChange.bind(this);
   }
 
+  /* ------------ event handlers ------------ */
+
   handleNameChange(event) {
     this.setState({name: event.target.value});
   }
@@ -47,7 +49,6 @@ class AddStudent extends Component {
     const { handleStudentSubmit } = this.props;
 
     event.preventDefault();
-    console.log(this.state)
     handleStudentSubmit(this.state)
   }
 
@@ -55,7 +56,7 @@ class AddStudent extends Component {
   render() {
 
     return (
-      <div>
+      <div className="container">
             <form onSubmit={this.handleSubmit}>
             
                  <h2>Add a Student</h2>
@@ -102,11 +103,10 @@ class AddStudent extends Component {
 }
 
 
-
+/* ------------ containers ------------ */
 
 const mapState = (state) => {
   return {
-    // grabbing from initial data, passed to everyone
    campuses: state.campus.campuses
   }
 }
@@ -118,22 +118,3 @@ const mapDispatch = dispatch => ({
 });
 
 export default connect(mapState, mapDispatch)(AddStudent);
-
-
-
-
-
-/*   REAL CAMPUSES NOT FAKE CAMPUSES:
-
-      <label>Campus</label>
-                    
-                          <select name="campus" onChange={this.handleCampuschange}>
-                          {this.props.campuses.map((campus, index) => { 
-                            return <option key={index} value={campus.name}>{campus.name}</option>
-                             }
-                          )
-                        }
-                        </select>
-
-
-  */

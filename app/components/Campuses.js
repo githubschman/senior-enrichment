@@ -11,8 +11,6 @@ class CampCont extends Component {
 
   render() {
 
-    console.log(this.props.campus)
-
     return (
       <div>
         <h1> Our Lovely Campuses: </h1>
@@ -28,6 +26,8 @@ class CampCont extends Component {
     )
   }
 }
+
+/* ------------ container ------------ */
 
 const mapState = (state) => {
   return {

@@ -23,8 +23,8 @@ const Campus = require('./campus')
   },
   email: {
     type: Sequelize.STRING,
-    // isEmail: true,
-    // allowNull: false
+    isEmail: true,
+    allowNull: false
   }
  },{
    classMethods: {
@@ -44,6 +44,7 @@ const Campus = require('./campus')
    }
  })
 
+/* ----- utility function for rounding gpa average to nearest 10th ----- */
 const roundGPA = (value) => {
   return Number(Math.round(value+'e'+2)+'e-'+2);
 };

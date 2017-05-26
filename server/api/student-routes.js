@@ -1,12 +1,10 @@
 'use strict'
 const router = require('express').Router();
-const db = require('../../db');
-
 const Student = require('../../db/models/user');
 const Campus = require('../../db/models/campus');
 
 
-//get the school of a student by their ID
+/* ------------ get school by id ------------ */
 router.get('/student-school/:id', (req, res) => {
 	Student.findOne({where:{
 		id: req.params.id
@@ -15,14 +13,14 @@ router.get('/student-school/:id', (req, res) => {
 	.then(school => res.send({name: school.name})))
 });
 
-//get all students
+/* ------------ get all students ------------ */
 router.get('/all-students', (req, res, next) => {
 	Student.findAll({})
 	.then((students) => res.send(students))
 	.catch(next);
 })
 
-//get student by id
+/* ------------ get student by id ------------ */
 router.get('/student/:id', (req, res, next) => {
 	Student.findOne({where:{
 		id: req.params.id
@@ -31,7 +29,7 @@ router.get('/student/:id', (req, res, next) => {
 	.catch(next);
 });
 
-//get student gpa by id
+/* ------------ get one student gpa ------------ */
 router.get('/student/:id/gpa', (req, res, next) => {
 	Student.findOne({where:{
 		id: req.params.id
@@ -40,7 +38,7 @@ router.get('/student/:id/gpa', (req, res, next) => {
 	.catch(next);
 });
 
-//get campus id for link...
+/* ------------ get campus id for link ------------ */
 router.get('/student/:id/campusId', (req, res, next) => {
 	Student.findById(req.params.id)
 	.then((student) => res.send({campusId: student.schoolId}))
@@ -48,7 +46,7 @@ router.get('/student/:id/campusId', (req, res, next) => {
 });
 
 
-//get student name by id
+/* ------------ get student name by id ------------ */
 router.get('/student/:id/name', (req, res, next) => {
 	Student.findOne({where:{
 		id: req.params.id
@@ -57,15 +55,14 @@ router.get('/student/:id/name', (req, res, next) => {
 	.catch(next);
 });
 
-//add new student
+/* ------------ add a new student ------------ */
 router.post('/student/addnew/', (req, res, next) => {
-	console.log('REQ BODY', req.body)
 	Student.create(req.body)
 	.then(newStudent => newStudent.setSchool(schoolId))
 	.catch(next);
 });
 
-//delete student /api/students/delete/
+/* ------------ delete a student ------------ */
 router.delete('/delete/:studentName', (req, res, next) => {
 	let studentName = req.params.studentName;
 
@@ -77,7 +74,7 @@ router.delete('/delete/:studentName', (req, res, next) => {
 	
 });
 
-//updating a student
+/* ------------ update a student ------------ */
 router.put('/:studentName', (req, res, next) => {
 	let studentName = req.params.studentName;
 	let updatedInfo = req.body;

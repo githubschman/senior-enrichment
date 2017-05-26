@@ -11,7 +11,7 @@ class StudentsCont extends Component {
 
   render() {
       return (
-      <div>
+      <div className="container">
         <h2> Our Unique Students: </h2>
         <div>
           <table>
@@ -48,7 +48,7 @@ class StudentsCont extends Component {
 
 const mapState = (state, ownprops) => {
   return {
-    //CAN WHOEVER IS READING PLEASE APPRECIATE THIS, IT WAS SO HARD TO COME UP WITH
+    //Wow, so modular, you can reuse this component using ownprops.students (for example, in single campus)
     students: ownprops.students || state.student.students
   }
 }
