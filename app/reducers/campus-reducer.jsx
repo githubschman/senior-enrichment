@@ -32,9 +32,9 @@ const campusReducer = function(state = initialState, action) {
             newState.campuses = [...action.campus]  
             break; 
        case REMOVE_CAMPUS:
-            console.log(newState.campuses.filter(campus => campus.name !== action.name))
+            //console.log(newState.campuses.filter(campus => campus.name !== action.name))
             //state updates successfully, but you need to axios delete that shit
-            //newState.campuses = newState.campuses.filter(campus => campus.name !== action.name)
+            newState.campuses = newState.campuses.filter(campus => campus.name !== action.name)
             break; 
         default: 
             return newState;
@@ -66,20 +66,14 @@ export const makeNewCampus = (campusName) => dispatch => {
 
 export const deleteCampus = (campusName) => dispatch => {
     //it gets in here. campusName being passed in is correct.
-    
+    console.log('in dispatcher')
+   
     //dispatch remove campus
     dispatch(removeCampus(campusName))
 
     //then do axios delete!!!!
+    axios.delete(`/api/campus/delete/${campusName}`)
+    .then(results => console.log(results))
 }
-
-/*
-export const removeStory = id => dispatch => {
-  dispatch(remove(id));
-  axios.delete(`/api/stories/${id}`)
-       .catch(err => console.error(`Removing story: ${id} unsuccessful`, err));
-};
-
-*/
 
 export default campusReducer;

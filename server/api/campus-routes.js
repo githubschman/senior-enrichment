@@ -44,32 +44,17 @@ router.post('/newCampus/', (req, res, next) => {
 });
 
 //delete a campus
-router.get('/delete/', (req, res, next) => {
+router.delete('/delete/:campusName', (req, res, next) => {
 	console.log('reaching delete api !!!')
+	let campusName = req.params.campusName;
 
-
-	// let campusName = req.body.campusName;
-	// Campus.findOne({where: {
-	// 	name: campusName
-	// }})
-	// .then(foundCampus => {const found = foundCampus})
-	// .then(	
-	// 	Campus.destroy({where: {name: campusName}})
-	// )
-	// .then(() => res.send(found))
-	// .catch(next)
-
+	Campus.destroy({where: {
+		name: campusName
+	}})
+	.then(() => res.status(204).end)
+	.catch(next);
+	
 })
-/*
 
-router.delete('/:id', function (req, res, next) {
-  req.story.destroy()
-  .then(function () {
-    res.status(204).end();
-  })
-  .catch(next);
-});
-
-*/
 
 module.exports = router;
