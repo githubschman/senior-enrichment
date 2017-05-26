@@ -15,7 +15,7 @@ const removeStudent = name => ({type: REMOVE_STUDENT, name});
 const updateStudent = updatedStudent => ({type: UPDATE_STUDENT, updatedStudent});
 
 //states:
-const initialState = {students: [], studentInfo: {campus: '', gpa: 0, name:'', campusId: 0}}
+const initialState = {students: [], studentInfo: {schoolId: 1, gpa: 0, name:'', campusId: 0}}
 //reducer:
 const studentReducer = function(state = initialState, action) {
     let newState = Object.assign({}, state);

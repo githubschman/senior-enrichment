@@ -59,6 +59,7 @@ router.get('/student/:id/name', (req, res, next) => {
 
 //add new student
 router.post('/student/addnew/', (req, res, next) => {
+	console.log('REQ BODY', req.body)
 	Student.create(req.body)
 	.then(newStudent => newStudent.setSchool(schoolId))
 	.catch(next);

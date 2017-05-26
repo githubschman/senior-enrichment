@@ -13,7 +13,7 @@ class AddStudent extends Component {
       major: '',
       email: '',
       grade: '',
-      campus: ''
+      schoolId: 1
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -40,7 +40,7 @@ class AddStudent extends Component {
   }
   
   handleCampusChange(event) {
-    this.setState({campus: event.target.value});
+    this.setState({schoolId: event.target.value});
   }
 
   handleSubmit(event){
@@ -82,11 +82,15 @@ class AddStudent extends Component {
                         </select>
 
                              
-                      <label>Campus</label>
-                          <select name="campus" onChange={this.handleCampusChange}>
-                            <option value="1">Venus</option>
-                            <option value="2">Pluto</option>
-                        </select>   
+                           <label>Campus</label>
+                    
+                              <select name="campus" onChange={this.handleCampusChange}>
+                              {this.props.campuses.map((campus, index) => { 
+                                return <option key={index} value={campus.id}>{campus.name}</option>
+                                }
+                              )
+                            }
+                        </select>
             
                   <button type="submit">SUBMIT</button> 
                 </form>
