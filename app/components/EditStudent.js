@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
-import Students from './Students'
 
-import { makeNewStudent } from '../reducers/student-reducer.jsx'
+import { editStudent } from '../reducers/student-reducer.jsx'
 
-class AddStudent extends Component {
+class EditStudent extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: '',
       major: '',
       email: '',
       grade: '',
-      campus: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleMajorChange = this.handleMajorChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleGradeChange = this.handleGradeChange.bind(this);
-    this.handleCampusChange = this.handleCampusChange.bind(this);
-  }
-
-  handleNameChange(event) {
-    this.setState({name: event.target.value});
   }
 
   handleMajorChange(event) {
@@ -39,31 +30,20 @@ class AddStudent extends Component {
     this.setState({grade: event.target.value});
   }
   
-  handleCampusChange(event) {
-    this.setState({campus: event.target.value});
-  }
-
   handleSubmit(event){
-    const { handleStudentSubmit } = this.props;
-
+    const { handleStudentUpdate } = this.props;
     event.preventDefault();
-    console.log(this.state)
-    handleStudentSubmit(this.state)
+    handleStudentUpdate(this.props.studentName, this.state)
   }
 
 
   render() {
-
     return (
       <div>
             <form onSubmit={this.handleSubmit}>
             
-                 <h2>Add a Student</h2>
-               
-               
-                      <label>Name</label>
-                      <input type="text" name="name" onChange={this.handleNameChange}/>
-                       
+                <h2> Edit this student </h2>
+
                       <label>Major</label>
                       <input type="text" name="major" onChange={this.handleMajorChange}/>
                 
@@ -80,13 +60,6 @@ class AddStudent extends Component {
                             <option value="junior">junior</option>
                             <option value="senior">senior</option>
                         </select>
-
-                             
-                      <label>Campus</label>
-                          <select name="campus" onChange={this.handleCampusChange}>
-                            <option value="1">Venus</option>
-                            <option value="2">Pluto</option>
-                        </select>   
             
                   <button type="submit">SUBMIT</button> 
                 </form>
@@ -101,35 +74,19 @@ class AddStudent extends Component {
 
 
 const mapState = (state) => {
+
   return {
-    // grabbing from initial data, passed to everyone
-   campuses: state.campus.campuses
+    // grabbing from initial data, passed to every component...
+   campuses: state.campus.campuses,
+   studentName: state.student.studentInfo.name
   }
 }
 
 const mapDispatch = dispatch => ({
-  handleStudentSubmit: (studentInfo) => {
-    dispatch(makeNewStudent(studentInfo));
+  handleStudentUpdate: (studentName, newStudentInfo) => {
+    dispatch(editStudent(studentName, newStudentInfo));
   }
 });
 
-export default connect(mapState, mapDispatch)(AddStudent);
+export default connect(mapState, mapDispatch)(EditStudent);
 
-
-
-
-
-/*   REAL CAMPUSES NOT FAKE CAMPUSES:
-
-      <label>Campus</label>
-                    
-                          <select name="campus" onChange={this.handleCampuschange}>
-                          {this.props.campuses.map((campus, index) => { 
-                            return <option key={index} value={campus.name}>{campus.name}</option>
-                             }
-                          )
-                        }
-                        </select>
-
-
-  */

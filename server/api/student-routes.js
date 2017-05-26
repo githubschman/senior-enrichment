@@ -66,7 +66,6 @@ router.post('/student/addnew/', (req, res, next) => {
 
 //delete student /api/students/delete/
 router.delete('/delete/:studentName', (req, res, next) => {
-	console.log('reaching delete api !!!')
 	let studentName = req.params.studentName;
 
 	Student.destroy({where: {
@@ -75,8 +74,25 @@ router.delete('/delete/:studentName', (req, res, next) => {
 	.then(() => res.status(204).end)
 	.catch(next);
 	
-})
+});
 
+//updating a student
+router.put('/:studentName', (req, res, next) => {
+	console.log('getting into student update router')
+	let studentName = req.params.studentName;
+	let updatedInfo = req.body;
+
+	Student.findOne({where: {
+		name: studentName
+	}})
+	.then(foundStudent => foundStudent.update({
+		major: updatedInfo.major || major,
+		email: updatedInfo.email || email,
+		grade: updatedInfo.grade || grade
+	}))
+	.then(() => res.status(200).end)
+	.catch(next);
+})
 
 
 module.exports = router;

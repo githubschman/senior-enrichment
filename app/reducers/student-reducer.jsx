@@ -5,11 +5,14 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT_INFO = 'GET_STUDENT_INFO';
 const CREATE_STUDENT = 'CREATE_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
+
 // action creators
-const getStudents = students => ({type: GET_STUDENTS, students})
-const getInfo = (campus, gpa, name, campusId) => ({type: GET_STUDENT_INFO, campus, gpa, name, campusId})
-const createStudent = student => ({type: CREATE_STUDENT, student})
-const removeStudent = name => ({type: REMOVE_STUDENT, name})
+const getStudents = students => ({type: GET_STUDENTS, students});
+const getInfo = (campus, gpa, name, campusId) => ({type: GET_STUDENT_INFO, campus, gpa, name, campusId});
+const createStudent = student => ({type: CREATE_STUDENT, student});
+const removeStudent = name => ({type: REMOVE_STUDENT, name});
+const updateStudent = updatedStudent => ({type: UPDATE_STUDENT, updatedStudent});
 
 //states:
 const initialState = {students: [], studentInfo: {campus: '', gpa: 0, name:'', campusId: 0}}
@@ -33,6 +36,9 @@ const studentReducer = function(state = initialState, action) {
         case REMOVE_STUDENT:
             newState.students = newState.students.filter(student => student.name !== action.name)    
             break;
+        case UPDATE_STUDENT:
+            students.map(student => (student.name === action.updatedStudent.name ? action.updatedStudent : student))
+            break;
         default: 
             return newState;
     }
@@ -43,7 +49,8 @@ const studentReducer = function(state = initialState, action) {
 // dispatchers:
 export const fetchStudents = () => dispatch => {
     axios.get('/api/students/all-students')
-    .then(res => dispatch(getStudents(res.data)));
+        .then(res => dispatch(getStudents(res.data)))
+        .catch(err => console.error);;
 };
 
 
@@ -53,17 +60,18 @@ export const fetchSingleStudentInfo = (studentId) => dispatch => {
             [axios.get(`/api/students/student-school/${studentId}`), 
              axios.get(`/api/students/student/${studentId}/gpa`),
              axios.get(`/api/students/student/${studentId}/name`),
-            axios.get(`/api/students/student/${studentId}/campusId`)])
-    .then(results => results.map(r => r.data))
-    .then(results => {
-        return dispatch(getInfo(...results))
+             axios.get(`/api/students/student/${studentId}/campusId`)])
+                .then(results => results.map(r => r.data))
+                .then(results => {
+                    return dispatch(getInfo(...results))
     })
 }
 
 export const makeNewStudent = (studentInfo) => dispatch => {
     axios.post('/api/students/student/addnew/', studentInfo)
-    .then(results => dispatch(createStudent(results.data)));
-}
+        .then(results => dispatch(createStudent(results.data)))
+        .catch(err => console.error);
+}   
 
 export const deleteStudent = (studentName) => dispatch => {
 
@@ -72,7 +80,16 @@ export const deleteStudent = (studentName) => dispatch => {
 
     //then do axios delete
     axios.delete(`/api/students/delete/${studentName}`)
-    .then(results => console.log(results))
+        .then(results => console.log(results))
+        .catch(err => console.error);
+}
+
+export const editStudent = (name, studentInfo) => dispatch => {
+    //ugh i just realized that two students could have the same name i dont know why i did this...
+    axios.put(`/api/students/${name}`, studentInfo)
+        .then(updatedStudent => dispatch(updateStudent(updatedStudent.data)))
+        .catch(err => console.error);
+
 }
 
 
