@@ -16,10 +16,10 @@ class CampCont extends Component {
     return (
       <div>
         <h1> Our Lovely Campuses: </h1>
-        <div>
+        <div className = "row">
           <ul>
           {this.props.campus.map((campus, index) => {
-            return (<li key={index}> <img src={campus.picture}/> <Link to={`/campus/${campus.id}`}> <h2> {campus.name} </h2> </Link> </li>)
+            return (<div className="col-xs-2"><li key={index}> <img src={campus.picture}/> <Link to={`/campus/${campus.id}`}> <h2> {campus.name} </h2> </Link> </li></div>)
           })}
           </ul>
         </div>

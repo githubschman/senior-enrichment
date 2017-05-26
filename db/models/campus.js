@@ -11,7 +11,7 @@ module.exports = db.define('campus', {
   },
   picture: {
     type: Sequelize.STRING,
-    defaultValue: '/default.jpg'
+    defaultValue: '/default.png'
   }
 },{
     associate: (models) => {
